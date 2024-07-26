@@ -1,0 +1,21 @@
+#! /bin/bash
+
+source ./Function/ConnectDB.sh
+
+select item in Create List","Drop","Connect"; do 
+
+	case $item in
+	   "Create")
+		;;
+
+	   "List")
+             ;;
+            "Drop")
+              ;; 
+             "Connect")
+	      hi
+              ;;
+
+ esac
+done
+
