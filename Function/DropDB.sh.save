@@ -1,14 +1,16 @@
 #! /bin/bash
 
 DropDB_fun(){
-array=( $(ls ./Databases/))
+array=( $(ls ./Tables/))
 echo "Tables names --> ${array[@]}" 
 read -p "Enter your DB Name You Want to Drop:" DBName
 
 if [[ (${array[@]} =~ $DBName) ]]
  then
-        echo "$(rm -d -f  ./Databases/${DBName})"
-	echo  "New DB LIST --> $(ls -F  ./Databases)"
+        echo "$(rm -d -f  ./Tables/${DBName})"
+        echo "$(unset ${array[@]})"
+	echo "New DB LIST --> $(ls ./Tablesy
+)"
       
  else
         echo "DB is not exist,Try again"
