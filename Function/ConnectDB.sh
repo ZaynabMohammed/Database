@@ -1,11 +1,17 @@
 #! /bin/bash
 
-source cd
+source ./Function/TableConnect/create.sh
+source ./Function/TableConnect/delete.sh
+source ./Function/TableConnect/drop.sh
+source ./Function/TableConnect/insert.sh
+source ./Function/TableConnect/list.sh
+source ./Function/TableConnect/Select.sh
+source ./Function/TableConnect/update.sh
+
 ConnectDB_fun(){
 array=( $(ls ./Databases/))
 echo "Tables names --> ${array[@]}" 
 read -p "Enter your DB Name You Want to connect to:" DBName
-#alias proj="cd ./Databases/${DBName}"
 
 if [[ (${array[@]} =~ $DBName) ]]
  then  
@@ -14,26 +20,27 @@ if [[ (${array[@]} =~ $DBName) ]]
 do 
 	case $item in
 	       	"Insert")
-			Insert_fun
+			Insert_fun ${DBName} 
 			;;
 	   	"Update")
-			Update_fun
+			Update_fun ${DBName} 
                 	;;
       
            	"Select")
-	      		Select_fun
+	      		Select_fun ${DBName} 
                 	;;
 	       	"Delete")
-	      		Delete_fun
+	      		Delete_fun ${DBName} 
                 	;;
           	"List")
-	      		List_fun
+	      		List_fun ${DBName} 
+
                 	;;
-		 	"Create")
-	      		List_fun
+		 "Create")
+	      		Create_fun ${DBName} 
                 	;;
 	     	"Drop")
-			Drop_fun
+			Drop_fun ${DBName} 
                 	;; 
 		"exit")
 			exit
