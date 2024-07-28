@@ -4,6 +4,7 @@ Create_fun(){
 
  read -p "Enter your Table Name:" TableName
  array=( $(ls ./Databases/$1/))
+ typearray=( "int" "string" )
  if [[ !(${array[@]} =~ $TableName) ]]
  then
 	 var=$(CheckRegex_fun "$TableName")
@@ -13,14 +14,30 @@ Create_fun(){
  	        touch  ${TableName}
 		touch "${TableName}.metadata"
 		read -p "Enter coloumns number:" cnum
-                echo "Coloumn number: $cnum" >> "${TableName}.metadata"
+                echo "Column_number: $cnum" >> "${TableName}.metadata"
 		for((i=1;i<=${cnum};i++))
 		do
 	            read -p "Enter coloumn $i name :" cname
-                    read -p "Enter coloumn $i type :" type
-
-		    echo "$cname $type" >> "${TableName}.metadata"
+		    ## append columns names inside table in same line
+		    printf "$cname " >> "${TableName}"
+		    echo  "For_type enter int OR string"
+                    
+		    read -p "Enter coloumn $i type :" Type
+		    #echo "$Type"
+		    ## give user another try to enter type if he entered a wrong type
+		    if [[ !(${typearray[@]} =~ $Type) ]]
+		    then
+			echo  "For_type enter int OR string"
+			read -p "Enter coloumn $i type :" Type
+		    else
+			echo "$cname $Type" >> "${TableName}.metadata"
+			continue
+		    fi	
+		    
+		    echo "$cname $Type" >> "${TableName}.metadata"
 		done
+		#to append new line 
+		echo " " >> "${TableName}"
 	 else
 		echo "Invalid!! Try, Again"
 		echo "It starts with number!! OR contains special_char!!"
@@ -29,6 +46,5 @@ Create_fun(){
 	echo "Table is exist,Try again"
  fi 
 
-
-
 }
+
