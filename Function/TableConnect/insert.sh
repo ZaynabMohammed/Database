@@ -3,11 +3,6 @@
 source ./Validation/CheckIntType.sh
 source ./Validation/CheckStringType.sh
 
-unique_value_fun () {
-
-  ####will write code here
-}
-
 Insert_fun(){
 read -p "Enter your Table Name:" TableName
 cd ./Databases/$1
@@ -22,7 +17,9 @@ do
                 continue
 	elif [[ "$c3" == "primarykey" ]]
 	then		
-		primary_key+=($c1)
+		primary_key+=($c1)	
+		col_arry+=($c1)	
+		type_arry+=($c2)
 	else
 		col_arry+=($c1)	
 		type_arry+=($c2)
@@ -30,18 +27,24 @@ do
 
 done < "${TableName}.metadata"	
 
-#echo "${primary_key[@]}"
-#echo "${type_arry[@]}"
-
 ###### insert into Table ##########
 for ((i=0;i<${#col_arry[@]};i++))
-do       
+do
+flag="N" 	
 read -p "Enter your value to ${col_arry[i]} column with type ${type_arry[i]}:" value
 #### Check if current col is primary key or not #######
 if [[ "${col_arry[i]}"  == "${primary_key[0]}" ]]
-then
+then    
+
 	#check if value is unique
-	unique_value_fun "$value"
+	varr=$[i+1]
+	arry2=($(awk -v numCol=$varr '{print $numCol}' "${TableName}"))
+	if [[ (${arry2[@]} =~ $value) ]]
+	then
+		flag="Y"
+		echo "your value is exist, Try Again "
+		break
+	fi	
 fi
 if [[ "${type_arry[i]}"  == "int" ]]
 then 
@@ -62,8 +65,11 @@ else
         fi	       
 fi	
 done
-	
-echo " " >> "${TableName}"
+##append new line
+if [[ "$flag" != "Y" ]]
+then	
+ 	echo " " >> "${TableName}"
+fi	
 }
 
 

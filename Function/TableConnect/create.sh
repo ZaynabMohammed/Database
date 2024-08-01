@@ -43,8 +43,9 @@ Create_fun(){
 			read -p "Enter coloumn $i type :" Type
 		    fi	
 		    ######################################################################
-		   if [[ "$flag" == "Yes" ]]
+		    if [[ "$flag" == "Yes" && ("$choice" == "Y" || "$choice" == "y") ]]
 		   then 
+			choice="N"
 			echo "$cname $Type primarykey" >> "${TableName}.metadata"
 	           else  	
 		        echo "$cname $Type" >> "${TableName}.metadata"
