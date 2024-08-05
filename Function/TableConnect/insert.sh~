@@ -5,7 +5,7 @@ source ./Validation/CheckStringType.sh
 
 Insert_fun(){
 read -p "Enter your Table Name:" TableName
-array=( $(ls ./Databases/$1/) )
+array=( $(ls ./Databases/$1) )
 if [[ !(${array[@]} =~ $TableName) ]]
 then
 	cd ./Databases/$1
