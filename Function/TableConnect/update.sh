@@ -6,7 +6,7 @@ Update_fun (){
 read -p "Enter your Table Name:" TableName
 
 array=( $(ls ./Databases/$1/) )
-if [[ !(${array[@]} =~ $TableName) ]]
+if [[ (${array[@]} =~ $TableName) ]]
 then
         cd ./Databases/$1
         col_arry=()
@@ -30,10 +30,10 @@ then
 
         done < "${TableName}.metadata"
 	
-	echo "Enter the value you want to update"
-	read -p "Enter its column name" col
-	read -p "Enter its value" val
-	read -p "Enter your new value" newval
+	echo "**Enter the value you want to update**"
+	read -p "Enter its column name: " col
+	read -p "Enter its value: " val
+	read -p "Enter your new value: " newval
 
 
 	#get index of col
@@ -77,20 +77,20 @@ then
 		if [[ (${arry2[@]} =~ $newval) ]]
 		then
 			echo "your value isn't unique, Try Again "
-			break
 		elif [[ "$val_type" == "Y" ]]
-		then	
-			sed 's/"$val"/"$newval"/' "${TableName}"
+		then
+			echo "000000"	
+		       sed -i "s/$val/$newval/" "${TableName}" 
 		fi		
 	
 	elif [[ "$val_type" == "Y" ]]
 	then
-		sed 's/"$val"/"$newval"/' "${TableName}"	
+		sed -i "s/$val/$newval/" "${TableName}" 
 
 	fi
 
 else
 	echo "Try Again, table doesn't exist"
 fi	
-
+echo "$(pwd)"
 }	

@@ -20,12 +20,13 @@ if [[ (${array[@]} =~ $DBName) ]]
 do 
 	case $item in
 	       	"Insert")
-			Insert_fun ${DBName} 
+			Insert_fun ${DBName}
+		        cd ../../
 			;;
 	   	"Update")
-			Update_fun ${DBName} 
+			Update_fun ${DBName}
+		        cd ../../	
                 	;;
-      
            	"Select")
 	      		Select_fun ${DBName} 
                 	;;
@@ -37,7 +38,8 @@ do
 
                 	;;
 		 "Create")
-	      		Create_fun ${DBName} 
+	      		Create_fun ${DBName}
+		        cd ../../	
                 	;;
 	     	"Drop")
 			Drop_fun ${DBName} 
