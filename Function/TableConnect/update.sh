@@ -79,7 +79,7 @@ then
 			echo "your value isn't unique, Try Again "
 		elif [[ "$val_type" == "Y" ]]
 		then
-			echo "000000"	
+			#echo "000000"	
 		       sed -i "s/$val/$newval/" "${TableName}" 
 		fi		
 	
