@@ -1,0 +1,14 @@
+#! /bin/bash
+
+function List_fun(){
+
+   echo "List of Tables"
+   echo "$(ls ./Databases/$1)"
+    array=( $( array=( $(ls ./Databases/))
+))
+ 
+if [[ (! $1 =~ ^[0-9]) && ($1 =~ ^[a-zA-Z0-9]*$) && ($1 =~ [a-zA-Z0-9]$) ]]
+  	then	 
+
+}
+
