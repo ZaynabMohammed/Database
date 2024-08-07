@@ -79,18 +79,27 @@ then
 			echo "your value isn't unique, Try Again "
 		elif [[ "$val_type" == "Y" ]]
 		then
-			#echo "000000"	
-		       sed -i "s/$val/$newval/" "${TableName}" 
+			grep "$val" "${TableName}" >/dev/null
+               		if [ $(echo "$?") -eq "0" ]
+               		then
+                        	sed -i "s/$val/$newval/" "${TableName}"
+                	else
+                        	echo "you entered unexisted value"
+                	fi
 		fi		
 	
 	elif [[ "$val_type" == "Y" ]]
 	then
-		sed -i "s/$val/$newval/" "${TableName}" 
-
+		grep "$val" "${TableName}" >/dev/null
+		if [ $(echo "$?") -eq "0" ]
+		then
+			sed -i "s/$val/$newval/" "${TableName}"
+		else
+			echo "you entered unexisted value"
+		fi	
 	fi
-
 else
 	echo "Try Again, table doesn't exist"
 fi	
-echo "$(pwd)"
+#echo "$(pwd)"
 }	

@@ -59,21 +59,8 @@ then
 else
 	echo "you entered unexisted column name"
 fi	
-
-
-
-echo "Will delete row based on a primarykey value"
-read -p "Enter value of ${primary_key[0]} column: " val
-grep "$val" "$1" >/dev/null
-if [ $(echo "$?") -eq "0" ]
-then
-        sed -i "/$val/d" "$1" &>/dev/null
-else
-        echo "You enter unexisted value"
-
-fi
-
 }
+
 function Delete_fun () {
 	DB=$1
 	array=( $(ls ./Databases/$DB/) )
