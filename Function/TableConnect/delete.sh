@@ -1,4 +1,5 @@
 #! /bin/bash
+source ../ConnectDB.sh
 
 function delete_table () {
 echo "$(rm -f $1)"
@@ -70,7 +71,7 @@ read -p "Enter your Table Name:" table
 if [[ (${array[@]} =~ $table) ]]
  then
 
-       select item in "Delete Table" "Delete Row" "Delete Column" "exit"
+       select item in "Delete Table" "Delete Row" "Delete Column" "back"
 	do
 		case $item in
 	       		"Delete Table")
@@ -88,8 +89,8 @@ if [[ (${array[@]} =~ $table) ]]
 	      			delete_column ${table}
 				cd ../../
                 		;;
-			"exit")
-				exit
+			"back")
+				ConnectDB_fun
       				;;
 		esac
 	done

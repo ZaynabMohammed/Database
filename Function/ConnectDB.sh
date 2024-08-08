@@ -7,7 +7,7 @@ source ./Function/TableConnect/insert.sh
 source ./Function/TableConnect/list.sh
 source ./Function/TableConnect/Select.sh
 source ./Function/TableConnect/update.sh
-
+source ../main.sh
 ConnectDB_fun(){
 array=( $(ls ./Databases/))
 echo "Tables names --> ${array[@]}" 
@@ -16,7 +16,7 @@ read -p "Enter your DB Name You Want to connect to:" DBName
 if [[ (${array[@]} =~ $DBName) ]]
  then  
 	
-       select item in "Insert" "Update" "Select" "Delete" "Create" "List" "Drop" "exit"
+       select item in "Insert" "Update" "Select" "Delete" "Create" "List" "Drop" "Back"
 do 
 	case $item in
 	       	"Insert")
@@ -44,8 +44,8 @@ do
 	     	"Drop")
 			Drop_fun ${DBName} 
                 	;; 
-		"exit")
-			exit
+		"Back")
+			main_fun "back"
       			;;		
 	esac
 done
