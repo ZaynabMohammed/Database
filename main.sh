@@ -5,6 +5,7 @@ source ./Function/CreateDB.sh
 source ./Function/DropDB.sh
 source ./Function/ListDB.sh
 
+function main_fun (){
 select item in "Create" "List" "Drop" "Connect" "exit"
 do 
 	case $item in
@@ -27,5 +28,10 @@ do
 
 	esac
 done
+}
 
+if [[ "$1" != "back" ]]
+then 
+main_fun
+fi
 
