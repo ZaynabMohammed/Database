@@ -1,5 +1,6 @@
 #! /bin/bash
-source ../ConnectDB.sh
+
+#source ./Database/Function/ConnectDB.sh
 
 function delete_table () {
 echo "$(rm -f $1)"

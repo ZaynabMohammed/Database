@@ -1,6 +1,7 @@
 #! /bin/bash
 
 Create_fun(){
+echo $(pwd)
 
  flag="No"
  read -p "Enter your Table Name:" TableName
@@ -22,7 +23,7 @@ Create_fun(){
 	            read -p "Enter coloumn $i name :" cname
 		    if [[ "$flag" == "No" ]]
 	            then
-			echo "hello"		    
+			#echo "hello"		    
      		    	## Ask user if want this column to act as a primary_key
 		    	read -p "IF U want this column to be a primary key Enter[Y/N]: " choice
 			if [[ "$choice" == "Y" || "$choice" == "y" ]]
@@ -57,7 +58,8 @@ Create_fun(){
 	 else
 		echo "Invalid!! Try, Again"
 		echo "It starts with number!! OR contains special_char!!"
-	 fi		
+	 fi
+		  cd ../../
  else
 	echo "Table is exist,Try again"
  fi 

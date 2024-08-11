@@ -7,8 +7,9 @@ source ./Function/TableConnect/insert.sh
 source ./Function/TableConnect/list.sh
 source ./Function/TableConnect/Select.sh
 source ./Function/TableConnect/update.sh
-source ../main.sh
+#source ../main.sh
 ConnectDB_fun(){
+echo $(pwd)
 array=( $(ls ./Databases/))
 echo "Tables names --> ${array[@]}" 
 read -p "Enter your DB Name You Want to connect to:" DBName
@@ -21,11 +22,11 @@ do
 	case $item in
 	       	"Insert")
 			Insert_fun ${DBName}
-		        cd ../../
+		        #cd ../../
 			;;
 	   	"Update")
 			Update_fun ${DBName}
-		        cd ../../	
+		       # cd ../../	
                 	;;
            	"Select")
 	      		Select_fun ${DBName} 
@@ -39,7 +40,8 @@ do
                 	;;
 		 "Create")
 	      		Create_fun ${DBName}
-		        cd ../../	
+		       # cd ../../	
+                        
                 	;;
 	     	"Drop")
 			Drop_fun ${DBName} 
@@ -54,6 +56,7 @@ done
         echo "DB is not exist,Try again"
 
  fi      
+#echo $(pwd)
 }
 
 

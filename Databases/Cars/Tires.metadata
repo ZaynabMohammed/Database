@@ -1,0 +1,3 @@
+Column_number: 2
+id int primarykey
+size string

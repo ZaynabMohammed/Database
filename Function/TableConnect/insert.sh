@@ -4,9 +4,10 @@ source ./Validation/CheckIntType.sh
 source ./Validation/CheckStringType.sh
 
 Insert_fun(){
+#echo $(pwd)
 read -p "Enter your Table Name:" TableName
 array=( $(ls ./Databases/$1/) )
-if [[ !(${array[@]} =~ $TableName) ]]
+if [[ (${array[@]} =~ $TableName) ]]
 then
 	cd ./Databases/$1
 	col_arry=()
@@ -57,6 +58,8 @@ then
 			printf "$value " >> "${TableName}"
 		else
 			echo "TRY, AGAIN!!! The value doesn't contain only numbers"
+                        flag="Y"
+			break
 		fi
 	else
 		var=$(CheckStringType_fun "$value")
@@ -65,6 +68,8 @@ then
         		printf "$value " >> "${TableName}"
         	else
        			echo "TRY, AGAIN!!! The value doesn't contain only chracters"
+                        flag="Y"
+			break
        		 fi	       
 	fi	
 	done
@@ -73,10 +78,9 @@ then
 	then	
  		echo " " >> "${TableName}"
 	fi	
+	 cd ../../
 else
 	echo "You enter unexisted table, try again"
 fi
 
 }
-
-

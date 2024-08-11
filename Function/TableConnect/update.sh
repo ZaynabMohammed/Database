@@ -4,9 +4,18 @@ source ./Validation/CheckStringType.sh
 
 Update_fun (){
 read -p "Enter your Table Name:" TableName
-
+found=0
 array=( $(ls ./Databases/$1/) )
-if [[ (${array[@]} =~ $TableName) ]]
+echo ${array[@]}
+for element in "${array[@]}"; do
+  if [[ "$element" == "$TableName" ]]; then
+    found=1
+    break
+  fi
+done
+
+#if [[ ${array[@]} =~ $TableName ]]
+if [[ found -eq 1 ]]
 then
         cd ./Databases/$1
         col_arry=()
@@ -63,7 +72,7 @@ then
                 then
                         val_type="Y"
                 else
-                        echo "TRY, AGAIN!!! The value doesn't contain only numbers"
+                        echo "TRY, AGAIN!!! The value doesn't contain only characters"
                 fi	
 
 	fi
@@ -98,6 +107,7 @@ then
 			echo "you entered unexisted value"
 		fi	
 	fi
+	 cd ../../
 else
 	echo "Try Again, table doesn't exist"
 fi	

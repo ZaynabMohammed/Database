@@ -12,7 +12,7 @@ then
 else
     cd ./Databases/$1
    # ls
-       select item in "Select All" "Select By Any Field In Table" "exit"
+       select item in "Select All" "Select By Any Field In Table" "Back"
 do 
 	case $item in
 	       	"Select All")
@@ -24,8 +24,9 @@ do
                               awk -v var="${sby}"  '{IGNORECASE = 1; for ( i=0 ; i<=NF ; i++) if ($i==var) {print $0}}' $TableName
  
                 	;;
-		"exit")
-			exit
+		"Back")
+                        cd ../../
+			ConnectDB_fun $1
       			;;		
 	esac
 done
