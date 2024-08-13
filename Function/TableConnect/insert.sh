@@ -4,7 +4,8 @@ source ./Validation/CheckIntType.sh
 source ./Validation/CheckStringType.sh
 
 Insert_fun(){
-#echo $(pwd)
+echo $(pwd)
+Insertflag="N"
 read -p "Enter your Table Name:" TableName
 array=( $(ls ./Databases/$1/) )
 if [[ (${array[@]} =~ $TableName) ]]
@@ -50,37 +51,51 @@ then
 			break
 		fi	
 	fi
+#set -x
 	if [[ "${type_arry[i]}"  == "int" ]]
 	then 
 		var=$(CheckIntType_fun "$value")
 		if [[ "$var" == "1" ]]
 		then
 			printf "$value " >> "${TableName}"
+			Insertflag="Y"
+                   
 		else
 			echo "TRY, AGAIN!!! The value doesn't contain only numbers"
                         flag="Y"
-			break
 		fi
 	else
 		var=$(CheckStringType_fun "$value")
 		if [[ "$var" == "1" ]]
         	then
         		printf "$value " >> "${TableName}"
+			Insertflag="Y"
         	else
        			echo "TRY, AGAIN!!! The value doesn't contain only chracters"
                         flag="Y"
-			break
        		 fi	       
-	fi	
+	fi
 	done
+
+   if [ $Insertflag == "Y" ] && [ $flag == "Y" ]
+    then 
+         sed -i '$d' $TableName
+	echo "Last line deleted" 
+   fi
+
+
 	##append new line
 	if [[ "$flag" != "Y" ]]
 	then	
  		echo " " >> "${TableName}"
-	fi	
-	 cd ../../
+	fi
+	cd ../../	
 else
 	echo "You enter unexisted table, try again"
+	
 fi
-
+#set +x
 }
+
+
+
